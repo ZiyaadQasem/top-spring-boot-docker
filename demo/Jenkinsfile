@@ -28,7 +28,7 @@ node ('Slave'){
       stage("release"){
                 sh 'docker rm mydemo --force | true'
                 sh 'docker run --name mydemo -p 8080:8080 -d salla-demo'
-                gitTag=sh(returnStdout: true, script: "git tag --contains | head -1").trim()
-                sh 'echo ' & gitTag
+                tag=sh(returnStdout: true, script: "git tag --contains | head -1").trim()
+                echo  tag
          }
 }
