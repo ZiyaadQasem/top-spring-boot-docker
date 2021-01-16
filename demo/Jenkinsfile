@@ -1,0 +1,13 @@
+node ('Slave'){
+
+  stage("One"){
+            sleep 10
+            echo 'hello from stage 1'
+            sh 'docker ps'
+    }
+    
+    stage("two"){
+            sleep 10
+            echo 'hello from stage 2'
+        }
+}
