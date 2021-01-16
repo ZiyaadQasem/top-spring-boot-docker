@@ -1,6 +1,5 @@
 node ('Slave'){
 
-  stages{
       stage('checkout') {
 
             git credentialsId: '', url: 'https://github.com/ZiyaadQasem/top-spring-boot-docker.git'
@@ -23,5 +22,4 @@ node ('Slave'){
                 sh 'docker push $DOCKER_USERNAME/sa-demo:1.0'
            }
        }
-  }
 }
