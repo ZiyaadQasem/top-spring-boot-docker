@@ -8,11 +8,11 @@ node ('Slave'){
         }
 
       stage("test-build"){
-                sh "mvn clean install"
+                sh "mvn clean install -f ./demo/pom.xml"
         }
 
         stage("build image"){
-                sh 'docker build -t salla-demo  .'
+                sh 'docker build -t salla-demo -f ./demo/Dockerfile  .'
          }
 
        stage("push image"){
