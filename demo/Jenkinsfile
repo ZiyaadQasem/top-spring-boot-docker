@@ -4,7 +4,7 @@ node ('Slave'){
 
       stage('checkout') {
 
-            git credentialsId: '', url: 'https://github.com/ZiyaadQasem/test-jenkins.git'
+            git credentialsId: '', url: 'https://github.com/ZiyaadQasem/top-spring-boot-docker.git'
         }
 
       stage("test-build"){
