@@ -1,3 +1,5 @@
+def tag
+
 node ('Slave'){
 
       stage('checkout') {
@@ -26,6 +28,7 @@ node ('Slave'){
       stage("release"){
                 sh 'docker rm mydemo --force | true'
                 sh 'docker run --name mydemo -p 8080:8080 -d salla-demo'
-                sh(returnStdout: true, script: "git tag --contains").trim()
+                gitTag=sh(returnStdout: true, script: "git tag --contains | head -1").trim()
+                sh 'echo ' & gitTag
          }
 }
