@@ -1,5 +1,10 @@
 node ('Slave'){
 
+  stage('checkout') {
+      
+        git credentialsId: '', url: 'https://github.com/ZiyaadQasem/top-spring-boot-docker.git'
+    }
+  
   stage("build"){
             sh "mvn clean verify"
     }
