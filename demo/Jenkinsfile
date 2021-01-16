@@ -26,8 +26,11 @@ node ('Slave'){
        }
       
       stage("release"){
+            withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'ziyaad-docker',
+                          usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASS']]) {
                 sh 'docker rm mydemo --force | true'
                 tag = sh(returnStdout:  true, script: "git tag --sort=-creatordate | head -n 1").trim()
                 sh 'docker run --name mydemo -p 8080:8080 -d $DOCKER_USERNAME/sa-demo:' + tag
+            }
          }
 }
