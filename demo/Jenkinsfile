@@ -5,12 +5,12 @@ node ('Slave'){
         git credentialsId: '', url: 'https://github.com/ZiyaadQasem/top-spring-boot-docker.git'
     }
   
-  stage("build"){
+  stage("test-build"){
             sh "mvn clean install -f ./demo/pom.xml"
     }
     
-    stage("two"){
-            sleep 10
+    stage("build image"){
+            sh 'docker build -t salla-demo -f ./demo/Dockerfile'
             echo 'hello from stage 2'
         }
 }
