@@ -6,7 +6,7 @@ node ('Slave'){
     }
   
   stage("build"){
-            sh "mvn clean verify -f /demo/pom.xml"
+            sh "mvn clean verify -f ./demo/pom.xml"
     }
     
     stage("two"){
