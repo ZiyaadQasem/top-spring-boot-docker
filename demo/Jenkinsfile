@@ -1,19 +1,27 @@
 node ('Slave'){
 
-  stage('checkout') {
-      
-        git credentialsId: '', url: 'https://github.com/ZiyaadQasem/top-spring-boot-docker.git'
-    }
-  
-  stage("test-build"){
-            sh "mvn clean install -f ./demo/pom.xml"
-    }
-    
-    stage("build image"){
-            sh 'docker build -t salla-demo -f ./demo/Dockerfile .'
-     }
-  
-   stage("push image"){
-            sh 'echo hello'
-     }
+  stages{
+      stage('checkout') {
+
+            git credentialsId: '', url: 'https://github.com/ZiyaadQasem/top-spring-boot-docker.git'
+        }
+
+      stage("test-build"){
+                sh "mvn clean install -f ./demo/pom.xml"
+        }
+
+        stage("build image"){
+                sh 'docker build -t salla-demo -f ./demo/Dockerfile .'
+         }
+
+       stage("push image"){
+          withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'ziyaad-docker',
+                          usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASS']]) {
+
+                sh 'docker login -u $DOCKER_USERNAME -p $DOCKER_PASS'
+                sh 'docker tag salla-demo $DOCKER_USERNAME/sa-demo:1.0'
+                sh 'docker push $DOCKER_USERNAME/sa-demo:1.0'
+           }
+       }
+  }
 }
