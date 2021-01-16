@@ -26,5 +26,6 @@ node ('Slave'){
       stage("release"){
                 sh 'docker rm mydemo --force | true'
                 sh 'docker run --name mydemo -p 8080:8080 -d salla-demo'
+                sh(returnStdout: true, script: "git tag --sort version:refname | tail -1").trim()
          }
 }
