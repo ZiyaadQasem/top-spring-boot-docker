@@ -1,9 +1,7 @@
 node ('Slave'){
 
-  stage("One"){
-            sleep 10
-            echo 'hello from stage 1'
-            sh 'docker ps'
+  stage("build"){
+            sh "mvn clean verify"
     }
     
     stage("two"){
